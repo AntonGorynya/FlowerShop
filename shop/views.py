@@ -10,3 +10,8 @@ def card(request):
     template = loader.get_template('card.html')
     return HttpResponse(template.render({}))
 
+
+def catalog(request):
+    template = loader.get_template('catalog.html')
+    return HttpResponse(template.render({}))
+

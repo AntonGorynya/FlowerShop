@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='indexpage'),
     path('card/', views.card, name='card'),
+    path('catalog/', views.catalog, name='catalog'),
 ]

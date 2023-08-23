@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -8,20 +9,7 @@
 	<link rel="stylesheet" href="css/main.css">	
 </head>
 <body>
-	<header id="header">
-		<div class="container">
-			<div class="header ficb">
-				<a href="/"><img src="img/logo.svg" alt="logo" class="logo"></a>
-				<nav>
-					<ul class="menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
+	{% include "header.html" %}
 	<section id="quiz">
 		<div class="container">
 			<div class="quiz">
