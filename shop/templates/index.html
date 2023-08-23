@@ -10,20 +10,7 @@
 </head>
 <body>
 	<div class="mainBg">
-		<header id="header">
-			<div class="container">
-				<div class="header ficb">
-					<a href="/"><img src="{% static "img/logo.svg" %}" alt="logo" class="logo"></a>
-					<nav>
-						<ul class="menu ficc">
-							<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-							<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-							<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
+		{% include "header.html" %}
 		<section id="banner">
 			<div class="container">
 				<div class="banner">
@@ -107,19 +94,7 @@
 	</section>
 	<footer id="footer">
 		<div class="container">
-			<div class="footer">
-				<a href="/"><img src="{% static "img/logo.svg" %}" alt="logo" class="logo footer__logo"></a>
-				<nav>
-					<ul class="menu footer__menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
-					</ul>
-				</nav>
-				<hr class="line"></hr>
-				<a href="#" class="footer__poli">Политика конфиденциальности</a>
-				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
-			</div>
+			{% include "footer.html" %}
 		</div>
 	</footer>
 </body>

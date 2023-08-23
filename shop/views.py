@@ -5,3 +5,8 @@ def index(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render({}))
 
+
+def card(request):
+    template = loader.get_template('card.html')
+    return HttpResponse(template.render({}))
+
