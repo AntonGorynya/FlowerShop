@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+PERIOD = [(1, 'Как можно скорее'), (2, 'с 10:00 до 12:00'), (3, 'с 12:00 до 14:00'), (4, 'с 14:00 до 16:00'),
+          (5, 'с 16:00 до 18:00'), (6, 'с 18:00 до 20:00')]
 # Application definition
 
 INSTALLED_APPS = [
@@ -120,6 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'shop', 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

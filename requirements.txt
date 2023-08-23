@@ -1,0 +1,6 @@
+Django~=4.2.4
+Pillow~=10.0.0
+pip~=22.0.2
+asgiref~=3.7.2
+sqlparse~=0.4.4
+setuptools~=59.6.0
