@@ -11,9 +11,13 @@ def consult(request):
 
 
 def index(request):
+    bouquets = Bouquet.objects.all()[:3]
     template = loader.get_template('index.html')
     consult(request)
-    return HttpResponse(template.render({}))
+    context = {
+        'bouquets': bouquets
+    }
+    return HttpResponse(template.render(context))
 
 
 def card(request):
