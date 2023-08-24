@@ -1,13 +1,30 @@
 from django.contrib import admin
-from .models import Order, Bouquet
+from .models import Order, Bouquet, Holiday, Consulting
+from django.utils.html import format_html
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    # list_display = ['bouquet', 'period']
     pass
 
 
 @admin.register(Bouquet)
 class BouquetAdmin(admin.ModelAdmin):
-    list_display = ['price']
+    readonly_fields = ['preview', ]
+
+    @staticmethod
+    def preview(obj):
+        return format_html('<img src="{}" style="max-height: {}px;" />',
+                           obj.image.url,
+                           200,
+                           )
+
+
+@admin.register(Holiday)
+class HolidayAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Consulting)
+class ConsultingAdmin(admin.ModelAdmin):
+    pass
