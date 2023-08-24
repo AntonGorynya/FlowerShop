@@ -24,8 +24,12 @@ def card(request):
 
 def catalog(request):
     template = loader.get_template('catalog.html')
+    bouquets = Bouquet.objects.all()
     consult(request)
-    return HttpResponse(template.render({}))
+    context = {
+        'bouquets': bouquets
+    }
+    return HttpResponse(template.render(context))
 
 
 def consultation(request):
@@ -34,7 +38,7 @@ def consultation(request):
     return HttpResponse(template.render({}))
 
 
-def order(request):
+def order(request, bouquet_id=0):
     template = loader.get_template('order.html')
     return HttpResponse(template.render({}))
 

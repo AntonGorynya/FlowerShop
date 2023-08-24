@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+
 {% include "head.html" %}
 <body>
 	{% include "header.html" %}
@@ -9,67 +9,22 @@
 			<div class="catalog">
 				<div class="title">Все букеты</div>
 				<div class="catalog__block">
-					<div class="recommended__elems ficb recommended__elems_first">
-						<div class="recommended__block recommended__block_first">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Летнее утро</span>
-								<span class="recommended__block_price">3 600 руб</span>
+					<div class="row">
+						{% for bouquet in bouquets%}
+							<div class="col col-4">
+								<img src="{{ bouquet.image.url }}" class="img" alt="{{ bouquet.name}}" onclick="location.href = '{% url "order" id=bouquet.id  %}'">
+								<span class="recommended__block_intro">{{ bouquet.id }} {{ bouquet.name }}</span>
+								<span class="recommended__block_price" >{{ bouquet.price }} руб</span>
 							</div>
-						</div>
-						<div class="recommended__block recommended__block_sec">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Пламенный закат</span>
-								<span class="recommended__block_price">3 600 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_thr">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Осенний</span>
-								<span class="recommended__block_price">3 600 руб</span>
-							</div>
-						</div>
-						
-
+						{% endfor %}
 					</div>
-					<div class="recommended__elems ficb recommended__elems_sec">
-						<div class="recommended__block recommended__block_first">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Полевой</span>
-								<span class="recommended__block_price">1 600 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_sec">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Весенний</span>
-								<span class="recommended__block_price">3 200 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_thr">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Нежный</span>
-								<span class="recommended__block_price">2 900 руб</span>
-							</div>
-						</div>
-						
-						
-					</div>
-					<button class="btn largeBtn catalog__btn">Показать ещё</button>
+					<button class="btn recommended__btn">Показать ещё</button>
 				</div>
-			</div>
-		</div>
-	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form">
-					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
-					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
 			</div>
 		</div>
 	</section>
 	{% include "footer.html" %}
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </html>
