@@ -74,6 +74,9 @@ def consultation(request):
 
 def order(request, bouquet_id=0):
     time_intervals = TimeInterval.objects.all()
+    bouquet = Bouquet.objects.get(id=bouquet_id)
+
+
     template = loader.get_template('order.html')
     name = request.GET.get('fname', None)
     phone = request.GET.get('tel', None)
@@ -93,7 +96,8 @@ def order(request, bouquet_id=0):
     consult(request)
     print(time_intervals)
     context ={
-        'time_intervals': time_intervals
+        'time_intervals': time_intervals,
+        'bouquet': bouquet,
     }
     return HttpResponse(template.render(context))
 

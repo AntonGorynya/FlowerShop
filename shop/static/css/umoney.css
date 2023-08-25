@@ -1,0 +1,309 @@
+.yoomoney-payment-form {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 480px;
+    padding: 0 20px;
+    margin: auto;
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif; }
+.yoomoney-payment-form input[type=number] {
+    -moz-appearance: textfield; }
+.yoomoney-payment-form input[type=number]::-webkit-outer-spin-button, .yoomoney-payment-form input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none; }
+.yoomoney-payment-form .ym-align-items-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+.yoomoney-payment-form .ym-align-items-start {
+    -webkit-box-align: start;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start; }
+.yoomoney-payment-form .ym-align-space-between {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+.yoomoney-payment-form .ym-block-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 8px; }
+.yoomoney-payment-form .ym-label-text {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-textarea {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 86px;
+    line-height: 32px;
+    border: 2px solid #D9D9D9;
+    border-radius: 4px;
+    background: #fff;
+    padding: 0 10px;
+    font-size: 15px;
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+    margin-top: 12px; }
+.yoomoney-payment-form .ym-textarea::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-textarea::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-textarea:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-textarea::-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-textarea::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    border: 2px solid #D9D9D9;
+    border-radius: 4px;
+    background: #fff;
+    padding: 0 10px;
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input::-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input::-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 15px; }    .yoomoney-payment-form .ym-count-input {
+                              position: relative; }
+.yoomoney-payment-form .ym-count-input .ym-count-control {
+    display: block;
+    width: 14px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer; }
+.yoomoney-payment-form .ym-count-input .ym-count-minus {
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMiIgdmlld0JveD0iMCAwIDE0IDIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDBWMkgxNFYwSDBaIiBmaWxsPSJibGFjayIgZmlsbC1vcGFjaXR5PSIwLjYiLz4NCjwvc3ZnPg==") no-repeat center;
+    top: 0;
+    right: 33px; }
+.yoomoney-payment-form .ym-count-input .ym-count-plus {
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTggNlYwSDZWNkgwVjhINlYxNEg4VjhIMTRWNkg4WiIgZmlsbD0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMC42Ii8+DQo8L3N2Zz4=") no-repeat center;
+    top: 0;
+    right: 9px; }
+.yoomoney-payment-form .ym-count-input input {
+    max-width: 210px;
+    padding-right: 47px; }
+.yoomoney-payment-form .ym-block-with-hint {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative; }
+.yoomoney-payment-form .ym-block-with-hint .ym-hint {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    visibility: hidden;
+    background: #FF3333;
+    color: #fff;
+    font-size: 13px;
+    line-height: 12px;
+    padding: 10px;
+    top: -webkit-calc(100% + 10px);
+    top: calc(100% + 10px);
+    cursor: default;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 100; }
+.yoomoney-payment-form .ym-block-with-hint .ym-hint:before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: #FF3333;
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    -ms-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg); }
+.yoomoney-payment-form .ym-visible-hint .ym-hint {
+    visibility: visible; }
+.yoomoney-payment-form .ym-products {
+    font-size: 15px;
+    color: #000; }
+.yoomoney-payment-form .ym-products .ym-product {
+    padding-bottom: 20px;
+    position: relative; }
+.yoomoney-payment-form .ym-products .ym-product:after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 108.33333333%;
+    left: -4.16666667%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1); }
+.yoomoney-payment-form .ym-products .ym-product .ym-product-line {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 20px; }
+.yoomoney-payment-form .ym-products .ym-product .ym-product-line .ym-product-description {
+    max-width: 210px; }
+.yoomoney-payment-form .ym-products .ym-product .ym-product-line .ym-product-description .ym-product-count {
+    color: rgba(0, 0, 0, 0.4);
+    padding-right: 3px; }
+.yoomoney-payment-form .ym-products .ym-product:last-of-type:after {
+    background: transparent; }
+.yoomoney-payment-form .ym-customer-info .ym-input {
+    margin-top: 12px; }
+.yoomoney-payment-form .ym-before-line {
+    padding-top: 20px;
+    position: relative; }
+.yoomoney-payment-form .ym-before-line:before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 108.33333333%;
+    left: -4.16666667%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.1); }
+.yoomoney-payment-form .ym-result-amount-block {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-bottom: 40px;
+    position: relative;
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input-icon-rub {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 10px;
+    min-width: 100px; }
+.yoomoney-payment-form .ym-input-icon-rub:after {
+    content: 'в‚Ѕ';
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 10px;
+    right: 8px;
+    top: 0;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 15px; }
+.yoomoney-payment-form .ym-input-icon-rub input {
+    padding-right: 20px; }
+.yoomoney-payment-form .ym-logo {
+    min-height: 30px; }
+.yoomoney-payment-form .ym-payment-btn-block {
+    margin-top: 32px;
+    height: 32px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+.yoomoney-payment-form .ym-payment-btn-block .ym-btn-pay {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 32px;
+    line-height: 32px;
+    font-size: 15px;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    background: #00BF96;
+    padding: 0 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 20px;
+    max-width: 190px;
+    text-align: left;
+    text-transform: capitalize;}
+.yoomoney-payment-form .ym-payment-btn-block .ym-btn-pay span {
+    display: inline-block; }
+.yoomoney-payment-form .ym-payment-btn-block .ym-btn-pay .ym-text-crop {
+    margin-right: 3px;
+    -webkit-box-flex: 2;
+    -webkit-flex: 2 2;
+    -ms-flex: 2 2;
+    flex: 2 2;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left; }
+.yoomoney-payment-form .ym-payment-btn-block .ym-disabled-btn {
+    background: #F2F2F2;
+    color: #7F7F7F;
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none; }
+
+.ym-display-none {
+    display: none !important; }
+
+@media only screen and (max-width: 480px) {
+    .yoomoney-payment-form {
+        padding: 0 5px; }
+    .yoomoney-payment-form .ym-input {
+        height: 30px;
+        min-height: 30px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-input-icon-rub {
+        margin-right: 5px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-input-icon-rub input {
+        height: 30px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-btn-pay {
+        max-width: 160px;
+        margin-right: 10px;
+        padding: 0 5px;
+        height: 30px;
+        min-height: 30px;
+        line-height: 30px;
+        font-size: 13px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-logo {
+        min-width: 80px; } }
+
+@media only screen and (max-width: 360px) {
+    .yoomoney-payment-form {
+        padding: 2px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-input-icon-rub {
+        margin-right: 5px; }
+    .yoomoney-payment-form .ym-align-space-between .ym-btn-pay {
+        height: 30px;
+        max-width: 160px;
+        padding: 0 3px;
+        margin-right: 5px; } }
