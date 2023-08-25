@@ -13,12 +13,13 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">На какой бюджет рассчитываете?</h1>
 					<div class="quiz__elems fic">
-						<form id="cost" method="post" action="{% url "catalog" %}"></form>
-						{% csrf_token %}
-						<button class="quiz__elem" form="cost" name="price" value="<1">До 1 000 руб</button>
-						<button class="quiz__elem" form="cost" name="price" value="1<5">1 000 - 5 000 руб</button>
-						<button class="quiz__elem" form="cost" name="price" value=">5">от 5 000 руб</button>
-						<button class="quiz__elem" form="cost" name="price" value="all">Не имеет значения</button>
+						<form action="{% url "catalog" %}" method="get">
+							<input type="submit" class="quiz__elem"  value="До 1 000 руб" name="0_1000"  />
+							<input type="submit" class="quiz__elem"  value="от 1 000  до 5 000" name="1000_5000"  />
+							<input type="submit" class="quiz__elem"  value="5 000+" name="5000_1"  />
+							<input type="hidden" name="holiday" value={{ holiday_id }}>
+
+						</form>
 					</div>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">

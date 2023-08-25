@@ -82,19 +82,26 @@ def card(request):
 
 @csrf_protect
 def catalog(request):
-    bouquets = Bouquet.objects.all()
-    if request.method == 'POST':
-        print(request.POST)
+    if 'holiday' not in request.GET:
+        bouquets = Bouquet.objects.all()
+    else:
+        min_price, max_price = list(request.GET)[0].split('_')
+        bouquets = Bouquet.objects.filter(
+            holidays__id=request.GET.get('holiday'),
+            price__gte=min_price,
+            price__lte=max_price
+
+        )
 
     consult(request)
     context = {
         'bouquets': bouquets
     }
     return render(request, 'catalog.html', context)
-    #return HttpResponse(template.render(context))
 
 
 def catalog_choice(request):
+    print(request.GET)
     template = loader.get_template('catalog_choice.html')
     consult(request)
     sender_request_ip = request.META.get('REMOTE_ADDR')
@@ -133,24 +140,17 @@ def order(request, bouquet_id=0):
 
 
 def quiz(request):
-    template = loader.get_template('quiz.html')
-    event = request.GET.get('event', None)
-    sender_request_ip = request.META.get('REMOTE_ADDR')
-    if event:
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_event'] = event
-        return redirect('quiz-step')
-    return render(request, 'quiz.html')
+    holidays = Holiday.objects.all()
+    context = {
+        'holidays': holidays
+    }
+    return render(request, 'quiz.html', context)
 
 
 @csrf_protect
 def quiz_step(request):
-    template = loader.get_template('quiz-step.html')
-    price = request.GET.get('price', None)
-    sender_request_ip = request.META.get('REMOTE_ADDR')
-    if price:
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_price'] = request.GET['price']
-        return redirect('catalog_choice')
-    return render(request, 'quiz-step.html')
+    holiday_id = list(request.GET.keys())[0]
+    return render(request, 'quiz-step.html', {'holiday_id': holiday_id})
 
 
 
