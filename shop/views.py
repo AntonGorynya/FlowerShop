@@ -21,6 +21,7 @@ def get_key(value):
     return None
 
 
+@csrf_protect
 def consult(request):
     fname = request.GET.get('fname', None)
     if fname:
@@ -47,8 +48,6 @@ def create_order(request):
         Configuration.account_id = ACCOUNT_ID
         Configuration.secret_key = U_KEY
 
-        print()
-
         payment = Payment.create({
             "amount": {
                 "value": f"{bouquet.price}",
@@ -62,7 +61,6 @@ def create_order(request):
             "description": f"{bouquet}"
         }, uuid.uuid4())
         confirmation_url = payment.confirmation.confirmation_url
-
     return redirect(confirmation_url)
 
 
@@ -73,23 +71,27 @@ def index(request):
     context = {
         'bouquets': bouquets
     }
-    return HttpResponse(template.render(context))
+    return render(request, 'index.html', context)
 
 
 def card(request):
     template = loader.get_template('card.html')
     consult(request)
-    return HttpResponse(template.render({}))
+    return render(request, 'card.html')
 
 
+@csrf_protect
 def catalog(request):
-    template = loader.get_template('catalog.html')
     bouquets = Bouquet.objects.all()
+    if request.method == 'POST':
+        print(request.POST)
+
     consult(request)
     context = {
         'bouquets': bouquets
     }
-    return HttpResponse(template.render(context))
+    return render(request, 'catalog.html', context)
+    #return HttpResponse(template.render(context))
 
 
 def catalog_choice(request):
@@ -110,13 +112,14 @@ def catalog_choice(request):
     context = {
         'bouquets': bouquets
     }
-    return HttpResponse(template.render(context))
+    #return HttpResponse(template.render(context))
+    return render(request, 'catalog_choice.html', context)
 
 
 def consultation(request):
     template = loader.get_template('consultation.html')
     consult(request)
-    return HttpResponse(template.render({}))
+    return render(request, 'consultation.html')
 
 @csrf_protect
 def order(request, bouquet_id=0):
@@ -136,9 +139,10 @@ def quiz(request):
     if event:
         settings.BOUQUET_CHOICE[f'{sender_request_ip}_event'] = event
         return redirect('quiz-step')
-    return HttpResponse(template.render({}))
+    return render(request, 'quiz.html')
 
 
+@csrf_protect
 def quiz_step(request):
     template = loader.get_template('quiz-step.html')
     price = request.GET.get('price', None)
@@ -146,10 +150,12 @@ def quiz_step(request):
     if price:
         settings.BOUQUET_CHOICE[f'{sender_request_ip}_price'] = request.GET['price']
         return redirect('catalog_choice')
-    return HttpResponse(template.render({}))
+    return render(request, 'quiz-step.html')
+
 
 
 def result(request):
     template = loader.get_template('result.html')
     consult(request)
-    return HttpResponse(template.render({}))
+    return render(request, 'result.html')
+

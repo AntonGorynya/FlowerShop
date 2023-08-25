@@ -13,7 +13,8 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">На какой бюджет рассчитываете?</h1>
 					<div class="quiz__elems fic">
-						<form id="cost" method="get"></form>
+						<form id="cost" method="post" action="{% url "catalog" %}"></form>
+						{% csrf_token %}
 						<button class="quiz__elem" form="cost" name="price" value="<1">До 1 000 руб</button>
 						<button class="quiz__elem" form="cost" name="price" value="1<5">1 000 - 5 000 руб</button>
 						<button class="quiz__elem" form="cost" name="price" value=">5">от 5 000 руб</button>
@@ -21,7 +22,7 @@
 					</div>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">
-							<span class="quiz__progress_num">1</span>
+							<span class="quiz__progress_num">2</span>
 							<span class="quiz__progress_in"> шаг из </span>
 							<span class="quiz__progress_num">2</span>
 						</div>
