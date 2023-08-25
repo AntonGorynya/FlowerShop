@@ -21,11 +21,11 @@ class Bouquet(models.Model):
     )
     description = models.TextField(verbose_name='описание', blank=True)
     consist = models.TextField(verbose_name='состав', blank=True)
-    holidays = models.ManyToManyField(Holiday, verbose_name='подходит для праздников:')
+    holidays = models.ManyToManyField(Holiday, verbose_name='подходит для праздников:', related_name='bouquets')
     name = models.CharField(verbose_name='Название букета', max_length=30)
 
     def __str__(self):
-        return f'{self.pk}_{self.price}'
+        return self.name
 
 
 class Order(models.Model):
@@ -45,3 +45,23 @@ class Consulting(models.Model):
 
     def __str__(self):
         return f'{self.name}_{self.phone}'
+
+
+class Aviso(models.Model):
+    number = models.IntegerField('номер карты')
+    month = models.PositiveSmallIntegerField('месяц окончания действия карты')
+    year = models.PositiveSmallIntegerField('год окончания действия карты')
+    name = models.CharField('имя владельца карты', max_length=300)
+    cvc = models.PositiveSmallIntegerField('cvc карты')
+    mail = models.CharField('e-mail', max_length=100, default=None)
+    price = models.DecimalField(
+        verbose_name='цена',
+        max_digits=7,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+    )
+    order = models.ForeignKey(Order, verbose_name='заказ который надо оплатить', on_delete=models.CASCADE,
+                              related_name='aviso')
+
+    def __str__(self):
+        return f'{self.name}___{self.price}'

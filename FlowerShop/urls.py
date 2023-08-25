@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.index, name='indexpage'),
     path('card/', views.card, name='card'),
     path('catalog/', views.catalog, name='catalog'),
+    path('catalog_choice/', views.catalog_choice, name='catalog_choice'),
     path('consultation/', views.consultation, name='consultation'),
     path('order/<int:bouquet_id>/', views.order, name='order'),
     path('order-step/', views.order_step, name='order-step'),

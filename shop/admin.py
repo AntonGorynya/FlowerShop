@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import Order, Bouquet, Holiday, Consulting
+from .models import Order, Bouquet, Holiday, Consulting, Aviso
 from django.utils.html import format_html
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Aviso)
+class AvisoAdmin(admin.ModelAdmin):
     pass
 
 

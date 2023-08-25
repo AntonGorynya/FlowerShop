@@ -13,9 +13,10 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">К какому событию нужен букет?</h1>
 					<div class="quiz__elems fic">
-						<button class="quiz__elem" id="1" onclick="window.location.href={% url "quiz-step" %}">Свадьба</button>
-						<button class="quiz__elem" id="2" onclick="window.location.href={% url "quiz-step" %}">День рождения</button>
-						<button class="quiz__elem" id="3" onclick="window.location.href={% url "quiz-step" %}">Без повода</button>
+						<form id="holiday" method="get"></form>
+						<button class="quiz__elem" form="holiday" name="event" value="Свадьба">Свадьба</button>
+						<button class="quiz__elem" form="holiday" name="event" value="День рождения">День рождения</button>
+						<button class="quiz__elem" form="holiday" name="event" value="Без повода">Без повода</button>
 					</div>
 					<script src="{% static "btn.js" %}"></script>
 					<div class="quiz__progress">
