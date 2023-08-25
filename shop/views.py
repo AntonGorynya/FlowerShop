@@ -2,6 +2,7 @@ from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from FlowerShop import settings
 from shop.models import Consulting, Order, Bouquet, Holiday, Aviso, TimeInterval
+from django.views.decorators.csrf import csrf_protect
 
 
 def get_key(value):
@@ -17,6 +18,11 @@ def consult(request):
         name = fname
         phone = request.GET['tel']
         Consulting.objects.create(name=name, phone=phone)
+
+
+def create_order(requst):
+    print(requst)
+    return redirect('https://yookassa.ru/integration/simplepay/payment')
 
 
 def index(request):
@@ -71,13 +77,12 @@ def consultation(request):
     consult(request)
     return HttpResponse(template.render({}))
 
-
+@csrf_protect
 def order(request, bouquet_id=0):
     time_intervals = TimeInterval.objects.all()
     bouquet = Bouquet.objects.get(id=bouquet_id)
-
-
     template = loader.get_template('order.html')
+
     name = request.GET.get('fname', None)
     phone = request.GET.get('tel', None)
     address = request.GET.get('adres', None)
@@ -94,33 +99,11 @@ def order(request, bouquet_id=0):
         settings.BOUQUET_CHOICE[f'{sender_request_ip}_order_id'] = order.id
         return redirect('order-step')
     consult(request)
-    print(time_intervals)
     context ={
         'time_intervals': time_intervals,
         'bouquet': bouquet,
     }
     return HttpResponse(template.render(context))
-
-
-def order_step(request):
-    template = loader.get_template('order-step.html')
-    number = request.GET.get('cardNum', None)
-    month = request.GET.get('cardMm', None)
-    year = request.GET.get('cardGg', None)
-    name = request.GET.get('cardFname', None)
-    cvc = request.GET.get('cardCvc', None)
-    if name and number and month and year and cvc:
-        sender_request_ip = request.META.get('REMOTE_ADDR')
-        bouquet_id = settings.BOUQUET_CHOICE[f'{sender_request_ip}_bouquet_id']
-        order_id = settings.BOUQUET_CHOICE[f'{sender_request_ip}_order_id']
-        price = Bouquet.objects.get(id=bouquet_id).price
-        order = Order.objects.get(id=order_id)
-        mail = request.GET.get('mail', None)
-        Aviso.objects.create(name=name, number=number, month=month, year=year, cvc=cvc, price=price, mail=mail,
-                             order=order)
-        return redirect('indexpage')
-    consult(request)
-    return HttpResponse(template.render({}))
 
 
 def quiz(request):

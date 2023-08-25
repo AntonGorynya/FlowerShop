@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load admin_urls %}
 {% include "head.html" %}
 
 <body>
@@ -31,13 +32,16 @@
 							<div class="order__form_line"></div>
 							<div class="order__form_btns ficb">
 								<link rel="stylesheet" href="{% static "css/umoney.css" %}">
-								<button class="btn order__form_pay">Оплатить</button>
+								<button class="btn order__form_pay" onclick="window.location.href='{% url "create_order" %}'">Оплатить</button>
 								<button class="btn order__form_btn" onclick="window.location.href='{% url "indexpage" %}'">Назад</button>
 								<input name="shopId" type="hidden" value="237136">
 								<input value="" type="hidden" name="ym_merchant_receipt">
 								<div class="ym-input-icon-rub ym-display-none">
 									<input name="sum" placeholder="0.00" class="ym-input ym-sum-input ym-required-input ym-display-none" type="number" step="any" value="{{ bouquet.price }}">
 								</div>
+								<div class="ym-hidden-inputs">
+       								<input name="shopSuccessURL" type="hidden" value="http://127.0.0.1:8000/">
+    							</div>
 							</div>
 						</form>
 					</div>
