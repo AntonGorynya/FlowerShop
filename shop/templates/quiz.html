@@ -15,7 +15,7 @@
 					<div class="quiz__elems fic">
 						<form action="{% url "quiz-step" %}" method="get">
 							{% for holiday in holidays %}
-								<input type="submit" class="quiz__elem"  value="{{ holiday }}" name="Submit"  />
+								<input type="submit" class="quiz__elem"  value="{{ holiday }}" name="{{ holiday.id }}"  />
 							{% endfor %}
 						</form>
 					</div>

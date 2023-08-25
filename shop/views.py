@@ -143,7 +143,7 @@ def quiz(request):
 @csrf_protect
 def quiz_step(request):
     print(request.GET)
-    print('111111111111111111111111111111')
+
 
 
     price = request.GET.get('price', None)
