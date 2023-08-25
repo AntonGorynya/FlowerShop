@@ -95,6 +95,7 @@ def catalog(request):
 
 
 def catalog_choice(request):
+    print(request.GET)
     template = loader.get_template('catalog_choice.html')
     consult(request)
     sender_request_ip = request.META.get('REMOTE_ADDR')
@@ -142,16 +143,8 @@ def quiz(request):
 
 @csrf_protect
 def quiz_step(request):
-    print(request.GET)
-
-
-
-    price = request.GET.get('price', None)
-    sender_request_ip = request.META.get('REMOTE_ADDR')
-    if price:
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_price'] = request.GET['price']
-        return redirect('catalog_choice')
-    return render(request, 'quiz-step.html')
+    holiday_id = list(request.GET.keys())[0]
+    return render(request, 'quiz-step.html', {'holiday_id': holiday_id})
 
 
 
