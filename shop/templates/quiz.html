@@ -15,9 +15,9 @@
 					<div class="quiz__elems fic">
 						<form id="holiday" method="get"></form>
 						{% csrf_token %}
-						<button class="quiz__elem" form="holiday" name="event" value="Свадьба">Свадьба</button>
-						<button class="quiz__elem" form="holiday" name="event" value="День рождения">День рождения</button>
-						<button class="quiz__elem" form="holiday" name="event" value="Без повода">Без повода</button>
+						{% for holiday in holidays %}
+							<button class="quiz__elem" form="holiday" name="event" value="{{ holiday }}">{{ holiday }}</button>
+						{% endfor %}
 					</div>
 					<script src="{% static "btn.js" %}"></script>
 					<div class="quiz__progress">

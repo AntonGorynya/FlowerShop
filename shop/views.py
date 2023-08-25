@@ -133,13 +133,12 @@ def order(request, bouquet_id=0):
 
 
 def quiz(request):
-    template = loader.get_template('quiz.html')
-    event = request.GET.get('event', None)
-    sender_request_ip = request.META.get('REMOTE_ADDR')
-    if event:
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_event'] = event
-        return redirect('quiz-step')
-    return render(request, 'quiz.html')
+    holidays = Holiday.objects.all()
+    context = {
+        'holidays': holidays
+    }
+
+    return render(request, 'quiz.html', context)
 
 
 @csrf_protect
