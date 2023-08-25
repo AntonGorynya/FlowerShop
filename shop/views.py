@@ -137,13 +137,15 @@ def quiz(request):
     context = {
         'holidays': holidays
     }
-
     return render(request, 'quiz.html', context)
 
 
 @csrf_protect
 def quiz_step(request):
-    template = loader.get_template('quiz-step.html')
+    print(request.GET)
+    print('111111111111111111111111111111')
+
+
     price = request.GET.get('price', None)
     sender_request_ip = request.META.get('REMOTE_ADDR')
     if price:

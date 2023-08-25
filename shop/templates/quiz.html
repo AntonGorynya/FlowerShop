@@ -13,11 +13,11 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">К какому событию нужен букет?</h1>
 					<div class="quiz__elems fic">
-						<form id="holiday" method="get"></form>
-						{% csrf_token %}
-						{% for holiday in holidays %}
-							<button class="quiz__elem" form="holiday" name="event" value="{{ holiday }}">{{ holiday }}</button>
-						{% endfor %}
+						<form action="{% url "quiz-step" %}" method="get">
+							{% for holiday in holidays %}
+								<input type="submit" class="quiz__elem"  value="{{ holiday }}" name="Submit"  />
+							{% endfor %}
+						</form>
 					</div>
 					<script src="{% static "btn.js" %}"></script>
 					<div class="quiz__progress">
