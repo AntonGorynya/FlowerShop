@@ -82,16 +82,22 @@ def card(request):
 
 @csrf_protect
 def catalog(request):
-    bouquets = Bouquet.objects.all()
-    if request.method == 'POST':
-        print(request.POST)
+    if 'holiday' not in request.GET:
+        bouquets = Bouquet.objects.all()
+    else:
+        min_price, max_price = list(request.GET)[0].split('_')
+        bouquets = Bouquet.objects.filter(
+            holidays__id=request.GET.get('holiday'),
+            price__gte=min_price,
+            price__lte=max_price
+
+        )
 
     consult(request)
     context = {
         'bouquets': bouquets
     }
     return render(request, 'catalog.html', context)
-    #return HttpResponse(template.render(context))
 
 
 def catalog_choice(request):
