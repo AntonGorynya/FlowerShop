@@ -6,6 +6,12 @@ from django.views.decorators.csrf import csrf_protect
 
 import uuid
 from yookassa import Configuration, Payment
+from environs import Env
+
+env = Env()
+env.read_env()
+ACCOUNT_ID = env('ACCOUNT_ID')
+U_KEY = env('U_KEY')
 
 
 def get_key(value):
@@ -38,8 +44,11 @@ def create_order(request):
             address=address,
             period=period
         )
-        Configuration.account_id = 237136
-        Configuration.secret_key = 'test_8veJnrLUb09Z9rU5B_kFryjyJwDfiThi8cI926tTxN0'
+        Configuration.account_id = ACCOUNT_ID
+        Configuration.secret_key = U_KEY
+
+        print()
+
         payment = Payment.create({
             "amount": {
                 "value": f"{bouquet.price}",
@@ -52,10 +61,7 @@ def create_order(request):
             "capture": True,
             "description": f"{bouquet}"
         }, uuid.uuid4())
-
-
         confirmation_url = payment.confirmation.confirmation_url
-        print(confirmation_url)
 
     return redirect(confirmation_url)
 
