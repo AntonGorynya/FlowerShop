@@ -1,7 +1,7 @@
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from FlowerShop import settings
-from shop.models import Consulting, Order, Bouquet, Holiday, Aviso
+from shop.models import Consulting, Order, Bouquet, Holiday, Aviso, TimeInterval
 
 
 def get_key(value):
@@ -73,7 +73,7 @@ def consultation(request):
 
 
 def order(request, bouquet_id=0):
-    time_intervals = settings.PERIOD
+    time_intervals = TimeInterval.objects.all()
     template = loader.get_template('order.html')
     name = request.GET.get('fname', None)
     phone = request.GET.get('tel', None)

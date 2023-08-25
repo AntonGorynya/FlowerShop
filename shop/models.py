@@ -7,6 +7,9 @@ from django.core.validators import MinValueValidator
 class TimeInterval(models.Model):
     description = models.CharField(verbose_name='Интервал', max_length=100)
 
+    def __str__(self):
+        return self.description
+
 
 class Holiday(models.Model):
     name = models.CharField(verbose_name='наименование праздника', max_length=300)
