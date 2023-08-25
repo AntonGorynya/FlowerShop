@@ -4,6 +4,9 @@ from FlowerShop import settings
 from shop.models import Consulting, Order, Bouquet, Holiday, Aviso, TimeInterval
 from django.views.decorators.csrf import csrf_protect
 
+import uuid
+from yookassa import Configuration, Payment
+
 
 def get_key(value):
     for period in settings.PERIOD:
@@ -20,9 +23,41 @@ def consult(request):
         Consulting.objects.create(name=name, phone=phone)
 
 
-def create_order(requst):
-    print(requst)
-    return redirect('https://yookassa.ru/integration/simplepay/payment')
+@csrf_protect
+def create_order(request):
+    if request.method == 'POST':
+        bouquet = Bouquet.objects.get(id=request.POST['bouquet'][0])
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        period = TimeInterval.objects.get(id=request.POST['orderTime'][0])
+        Order.objects.create(
+            bouquet=bouquet,
+            name=name,
+            phone=phone,
+            address=address,
+            period=period
+        )
+        Configuration.account_id = 237136
+        Configuration.secret_key = 'test_8veJnrLUb09Z9rU5B_kFryjyJwDfiThi8cI926tTxN0'
+        payment = Payment.create({
+            "amount": {
+                "value": f"{bouquet.price}",
+                "currency": "RUB"
+            },
+            "confirmation": {
+                "type": "redirect",
+                "return_url": "http://127.0.0.1:8000/"
+            },
+            "capture": True,
+            "description": f"{bouquet}"
+        }, uuid.uuid4())
+
+
+        confirmation_url = payment.confirmation.confirmation_url
+        print(confirmation_url)
+
+    return redirect(confirmation_url)
 
 
 def index(request):
@@ -81,29 +116,11 @@ def consultation(request):
 def order(request, bouquet_id=0):
     time_intervals = TimeInterval.objects.all()
     bouquet = Bouquet.objects.get(id=bouquet_id)
-    template = loader.get_template('order.html')
-
-    name = request.GET.get('fname', None)
-    phone = request.GET.get('tel', None)
-    address = request.GET.get('adres', None)
-    if name and phone and address:
-        sender_request_ip = request.META.get('REMOTE_ADDR')
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_bouquet_id'] = bouquet_id
-        order_time = request.GET.get('orderTime', None)
-        period = get_key(order_time)
-        bouquet = Bouquet.objects.get(id=bouquet_id)
-        if period:
-            order = Order.objects.create(bouquet=bouquet, name=name, phone=phone, address=address, period=period)
-        else:
-            order = Order.objects.create(bouquet=bouquet, name=name, phone=phone, address=address)
-        settings.BOUQUET_CHOICE[f'{sender_request_ip}_order_id'] = order.id
-        return redirect('order-step')
-    consult(request)
     context ={
         'time_intervals': time_intervals,
         'bouquet': bouquet,
     }
-    return HttpResponse(template.render(context))
+    return render(request, 'order.html', context)
 
 
 def quiz(request):

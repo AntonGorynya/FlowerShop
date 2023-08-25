@@ -12,11 +12,13 @@
 					<div class="order_items">
 						<div class="title">Оформление доставки</div>
 						<div><p>{{ bouquet.name }}: {{ bouquet.price }} руб</p></div>
-						<form class="order__form" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
+						<form class="order__form" action="{% url "create_order" %}" method="post" accept-charset="utf-8">
+						{% csrf_token %}
 							<div class="order__form_block ficb">
-								<input type="text" name="fname" class="order__form_input" placeholder="Введите Имя" required>
-								<input type="text" name="tel" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
-								<input type="text" name="adres" class="order__form_input" placeholder="Адрес доставки" required>
+								<input type="text" name="name" class="order__form_input" placeholder="Введите Имя" required>
+								<input type="text" name="phone" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
+								<input type="text" name="address" class="order__form_input" placeholder="Адрес доставки" required>
+								<input type="hidden" name="bouquet" value={{ bouquet.id }}>
 							</div>
 							<div class="order__form_block ficb">
 								<input type="text" name="email" class="order__form_input" placeholder="email" required>
@@ -24,24 +26,15 @@
 							<div class="order__form_btns fic">
 								{% for interval in time_intervals %}
 									<div class="order__form_radioBlock ">
-										<input type="radio" name="orderTime" id="radio{{ interval.id }}" value="{{ interval.description }}" class="order__form_radio" />
+										<input type="radio" name="orderTime" id="radio{{ interval.id }}" value="{{ interval.id  }}" class="order__form_radio" />
 										<label for="radio{{ interval.id }}" class="radioLable">{{ interval.description }}</label>
 									</div>
 								{% endfor %}
 							</div>
 							<div class="order__form_line"></div>
 							<div class="order__form_btns ficb">
-								<link rel="stylesheet" href="{% static "css/umoney.css" %}">
-								<button class="btn order__form_pay" onclick="window.location.href='{% url "create_order" %}'">Оплатить</button>
+								<button class="btn order__form_pay">Оплатить</button>
 								<button class="btn order__form_btn" onclick="window.location.href='{% url "indexpage" %}'">Назад</button>
-								<input name="shopId" type="hidden" value="237136">
-								<input value="" type="hidden" name="ym_merchant_receipt">
-								<div class="ym-input-icon-rub ym-display-none">
-									<input name="sum" placeholder="0.00" class="ym-input ym-sum-input ym-required-input ym-display-none" type="number" step="any" value="{{ bouquet.price }}">
-								</div>
-								<div class="ym-hidden-inputs">
-       								<input name="shopSuccessURL" type="hidden" value="http://127.0.0.1:8000/">
-    							</div>
 							</div>
 						</form>
 					</div>

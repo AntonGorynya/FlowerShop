@@ -40,7 +40,7 @@ class Order(models.Model):
     name = models.CharField(verbose_name='имя', max_length=300)
     phone = models.CharField(verbose_name='телефон', max_length=300)
     address = models.CharField(verbose_name='адрес', max_length=300)
-    period = models.PositiveSmallIntegerField(verbose_name='время доставки', choices=settings.PERIOD, default=1)
+    period = models.ForeignKey(TimeInterval, verbose_name='временной интервал', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name}_{self.bouquet.price}'
