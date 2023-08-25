@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import Order, Bouquet, Holiday, Consulting, Aviso
+from .models import Order, Bouquet, Holiday, Consulting, Aviso, TimeInterval
 from django.utils.html import format_html
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TimeInterval)
+class TimeIntervalAdmin(admin.ModelAdmin):
     pass
 
 

@@ -73,6 +73,7 @@ def consultation(request):
 
 
 def order(request, bouquet_id=0):
+    time_intervals = settings.PERIOD
     template = loader.get_template('order.html')
     name = request.GET.get('fname', None)
     phone = request.GET.get('tel', None)
@@ -90,7 +91,11 @@ def order(request, bouquet_id=0):
         settings.BOUQUET_CHOICE[f'{sender_request_ip}_order_id'] = order.id
         return redirect('order-step')
     consult(request)
-    return HttpResponse(template.render({}))
+    print(time_intervals)
+    context ={
+        'time_intervals': time_intervals
+    }
+    return HttpResponse(template.render(context))
 
 
 def order_step(request):

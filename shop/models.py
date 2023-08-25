@@ -4,6 +4,10 @@ from FlowerShop import settings
 from django.core.validators import MinValueValidator
 
 
+class TimeInterval(models.Model):
+    description = models.CharField(verbose_name='Интервал', max_length=100)
+
+
 class Holiday(models.Model):
     name = models.CharField(verbose_name='наименование праздника', max_length=300)
 
@@ -25,7 +29,7 @@ class Bouquet(models.Model):
     name = models.CharField(verbose_name='Название букета', max_length=30)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}_{self.price}'
 
 
 class Order(models.Model):
