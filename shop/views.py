@@ -1,24 +1,15 @@
 from django.shortcuts import render, loader, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from FlowerShop import settings
-from shop.models import Consulting, Order, Bouquet, Holiday, TimeInterval
 from django.views.decorators.csrf import csrf_protect
-
-import uuid
+from shop.models import Consulting, Order, Bouquet, Holiday, TimeInterval
 from yookassa import Configuration, Payment
 from environs import Env
+import uuid
 
 env = Env()
 env.read_env()
 ACCOUNT_ID = env('ACCOUNT_ID')
 U_KEY = env('U_KEY')
-
-
-def get_key(value):
-    for period in settings.PERIOD:
-        if period[1] == value:
-            return period[0]
-    return None
 
 
 @csrf_protect
@@ -109,45 +100,24 @@ def catalog(request):
     return render(request, 'catalog.html', context)
 
 
-def catalog_choice(request):
-    print(request.GET)
-    template = loader.get_template('catalog_choice.html')
-    consult(request)
-    sender_request_ip = request.META.get('REMOTE_ADDR')
-    holiday_name = settings.BOUQUET_CHOICE[f'{sender_request_ip}_event']
-    price = settings.BOUQUET_CHOICE[f'{sender_request_ip}_price']
-    holiday = Holiday.objects.get(name=holiday_name)
-    if price == '<1':
-        bouquets = holiday.bouquets.filter(price__lte=1000)
-    elif price == '1<5':
-        bouquets = holiday.bouquets.filter(price__gt=1000).filter(price__lte=5000)
-    elif price == '>5':
-        bouquets = holiday.bouquets.filter(price__gt=5000)
-    else:
-        bouquets = holiday.bouquets.all()
-    context = {
-        'bouquets': bouquets
-    }
-    #return HttpResponse(template.render(context))
-    return render(request, 'catalog_choice.html', context)
-
-
 def consultation(request):
     template = loader.get_template('consultation.html')
     consult(request)
     return render(request, 'consultation.html')
 
+
 @csrf_protect
 def order(request, bouquet_id=0):
     time_intervals = TimeInterval.objects.all()
     bouquet = Bouquet.objects.get(id=bouquet_id)
-    context ={
+    context = {
         'time_intervals': time_intervals,
         'bouquet': bouquet,
     }
     return render(request, 'order.html', context)
 
 
+@csrf_protect
 def quiz(request):
     holidays = Holiday.objects.all()
     context = {
@@ -162,9 +132,7 @@ def quiz_step(request):
     return render(request, 'quiz-step.html', {'holiday_id': holiday_id})
 
 
-
 def result(request):
     template = loader.get_template('result.html')
     consult(request)
     return render(request, 'result.html')
-
