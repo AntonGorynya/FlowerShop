@@ -1,7 +1,7 @@
 from django.shortcuts import render, loader, redirect
-from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from FlowerShop import settings
-from shop.models import Consulting, Order, Bouquet, Holiday, Aviso, TimeInterval
+from shop.models import Consulting, Order, Bouquet, Holiday, TimeInterval
 from django.views.decorators.csrf import csrf_protect
 
 import uuid
@@ -92,10 +92,19 @@ def catalog(request):
             price__lte=max_price
 
         )
-
+    paginator = Paginator(bouquets, 3)
+    page = request.GET.get('page')
+    try:
+        bouquets_page = paginator.page(page)
+    except PageNotAnInteger:
+        bouquets_page = paginator.page(1)
+    except EmptyPage:
+        bouquets_page = paginator.page(paginator.num_pages)
     consult(request)
     context = {
-        'bouquets': bouquets
+        'bouquets': bouquets,
+        'page': page,
+        'bouquets_page': bouquets_page
     }
     return render(request, 'catalog.html', context)
 

@@ -4,23 +4,25 @@
 {% include "head.html" %}
 <body>
 	{% include "header.html" %}
-	<section id="catalog">
-		<div class="container p100">
-			<div class="catalog">
-				<div class="title">Все букеты</div>
-				<div class="catalog__block">
-					<div class="row">
-						{% for bouquet in bouquets%}
-							<div class="col col-4">
-								<img src="{{ bouquet.image.url }}" class="img" alt="{{ bouquet.name}}" onclick="location.href = '{% url "order" bouquet_id=bouquet.id  %}'">
-								<span class="recommended__block_intro">{{ bouquet.id }} {{ bouquet.name }}</span>
-								<span class="recommended__block_price" >{{ bouquet.price }} руб</span>
-							</div>
-						{% endfor %}
+	<section id="catalog" >
+		<div class = "parentCatalog">
+			<div class="container p100" align="justify">
+				<div class="catalog">
+					<div class="title">Все букеты</div>
+					<div class="catalog__block">
+						<div class="row">
+							{% for bouquet in bouquets_page %}
+								<div class="col col-4">
+									<img src="{{ bouquet.image.url }}" class="img" alt="{{ bouquet.name}}" onclick="location.href = '{% url "order" bouquet_id=bouquet.id  %}'">
+									<span class="recommended__block_intro">{{ bouquet.id }} {{ bouquet.name }}</span>
+									<span class="recommended__block_price" >{{ bouquet.price }} руб</span>
+								</div>
+							{% endfor %}
+						</div>
 					</div>
-					<button class="btn recommended__btn">Показать ещё</button>
 				</div>
 			</div>
+		{% include "pagination.html" with page=bouquets_page %}
 		</div>
 	</section>
 	{% include "footer.html" %}

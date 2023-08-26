@@ -751,3 +751,37 @@ color: #2D2D2D;
 opacity: 0.3;
 }
 
+.current {
+    display: inline-block;
+	font-family:  sans-serif;
+    vertical-align: middle;
+    text-align: center;
+	font-size: 16px;
+	line-height: normal;
+	color: #ABABAB;
+	font-weight: 800;
+}
+
+.parentCatalog {
+    padding-bottom: 30px;
+
+}
+
+.pageButton {
+    background: #17CF97;
+	border-radius: 40px;
+	font-weight: 800;
+	font-size: 16px;
+	line-height: 103.52%;
+	color: #FFFFFF;
+	border: none;
+	cursor: pointer;
+    width: 100%;
+	height: 57px;
+	margin-top: 30px;
+}
+
+.steps {
+    white-space: nowrap;
+    margin-left: 650px
+}
