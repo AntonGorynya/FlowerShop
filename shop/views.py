@@ -61,7 +61,7 @@ def create_order(request):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": "https://kaser137.pythonanywhere.com/"
+                "return_url": f"http://127.0.0.1:8000/?id={bouquet.id}"
             },
             "capture": True,
             "description": f"{bouquet}",
@@ -72,7 +72,6 @@ def create_order(request):
 
 
 def index(request):
-    print(request.GET)
     bouquets = Bouquet.objects.all()[:3]
     consult(request)
     context = {
