@@ -72,6 +72,7 @@ def create_order(request):
 
 
 def index(request):
+    print(request.GET)
     bouquets = Bouquet.objects.all()[:3]
     consult(request)
     context = {

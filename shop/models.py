@@ -50,6 +50,7 @@ class Order(models.Model):
     phone = models.CharField(verbose_name='телефон', max_length=300)
     address = models.CharField(verbose_name='адрес', max_length=300)
     period = models.ForeignKey(TimeInterval, verbose_name='временной интервал', on_delete=models.CASCADE)
+    is_paid = models.BooleanField(verbose_name='Оплачено', default=False)
 
     def __str__(self):
         return f'{self.name}_{self.bouquet.price}'
