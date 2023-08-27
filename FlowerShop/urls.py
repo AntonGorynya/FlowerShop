@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
-
 from FlowerShop import settings
 from shop import views
 
@@ -25,7 +24,6 @@ urlpatterns = [
     path('', views.index, name='indexpage'),
     path('card/', views.card, name='card'),
     path('catalog/', views.catalog, name='catalog'),
-    path('catalog_choice/', views.catalog_choice, name='catalog_choice'),
     path('consultation/', views.consultation, name='consultation'),
     path('order/<int:bouquet_id>/', views.order, name='order'),
     path('create_order/', views.create_order, name='create_order'),

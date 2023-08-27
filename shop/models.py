@@ -1,6 +1,6 @@
 from django.db import models
-from FlowerShop import settings
-
+from PIL import Image
+from os import path
 from django.core.validators import MinValueValidator
 
 
@@ -31,8 +31,17 @@ class Bouquet(models.Model):
     holidays = models.ManyToManyField(Holiday, verbose_name='подходит для праздников:', related_name='bouquets')
     name = models.CharField(verbose_name='Название букета', max_length=30)
 
+    def save(self, *args, **kwargs):
+        super(Bouquet, self).save(*args, **kwargs)
+
+        if self.image:
+            img_path = self.image.path
+            img = Image.open(img_path)
+            img = img.resize((403, 348))
+            img.save(img_path)
+
     def __str__(self):
-        return f'{self.name}_{self.price}'
+        return self.name
 
 
 class Order(models.Model):
@@ -52,23 +61,3 @@ class Consulting(models.Model):
 
     def __str__(self):
         return f'{self.name}_{self.phone}'
-
-
-class Aviso(models.Model):
-    number = models.IntegerField('номер карты')
-    month = models.PositiveSmallIntegerField('месяц окончания действия карты')
-    year = models.PositiveSmallIntegerField('год окончания действия карты')
-    name = models.CharField('имя владельца карты', max_length=300)
-    cvc = models.PositiveSmallIntegerField('cvc карты')
-    mail = models.CharField('e-mail', max_length=100, default=None)
-    price = models.DecimalField(
-        verbose_name='цена',
-        max_digits=7,
-        decimal_places=2,
-        validators=[MinValueValidator(0)],
-    )
-    order = models.ForeignKey(Order, verbose_name='заказ который надо оплатить', on_delete=models.CASCADE,
-                              related_name='aviso')
-
-    def __str__(self):
-        return f'{self.name}___{self.price}'

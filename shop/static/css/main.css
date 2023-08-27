@@ -44,7 +44,7 @@ input::placeholder {
 .btn {
 	background: #17CF97;
 	border-radius: 40px;
-	font-weight: 500;
+	font-weight: 800;
 	font-size: 16px;
 	line-height: 103.52%;
 	color: #FFFFFF;
@@ -749,5 +749,21 @@ line-height: 145.02%;
 color: #2D2D2D;
 
 opacity: 0.3;
+}
+
+.current {
+    display: inline-block;
+	font-family:  sans-serif;
+    vertical-align: middle;
+    text-align: center;
+	font-size: 16px;
+
+	color: #ABABAB;
+	font-weight: 800;
+}
+
+.parentCatalog {
+    padding-bottom: 30px;
+
 }
 

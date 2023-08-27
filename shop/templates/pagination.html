@@ -1,0 +1,15 @@
+{% load static %}
+<form id="pag" method="get"> </form>
+<div class="pagination" style="width: auto; align: center">
+        <span class="pagination" style="display: block; white-space: nowrap; margin-left: auto; margin-right: auto;">
+            {% if page.has_previous %}
+                <button form="pag" type="submit" class="btn banner_btn" style="display: inline-block; height: 50px; width: 35%;" name="page" value="{{ page.previous_page_number }}"><<<</button>
+            {% endif %}
+            <span class="current" >
+                Page {{ page.number }} of {{ page.paginator.num_pages }}
+            </span>
+            {% if page.has_next %}
+                <button form="pag" type="submit" class="btn banner_btn" style="display: inline-block; height: 50px; width: 35%;" name="page" value="{{ page.next_page_number }}">>>></button>
+            {% endif %}
+        </span>
+</div>
