@@ -61,7 +61,7 @@ def create_order(request):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": f"http://127.0.0.1:8000/?id={bouquet.id}"
+                "return_url": f"http://kaser137.pythonanywhere.com/?id={bouquet.id}"
             },
             "capture": True,
             "description": f"{bouquet}",
