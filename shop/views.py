@@ -1,17 +1,24 @@
+import telegram
+
+from .telegram_norification import send_notification
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from FlowerShop import settings
-from shop.models import Consulting, Order, Bouquet, Holiday, Aviso, TimeInterval
+from shop.models import Consulting, Order, Bouquet, Holiday, TimeInterval
 from django.views.decorators.csrf import csrf_protect
 
 import uuid
 from yookassa import Configuration, Payment
 from environs import Env
 
+
 env = Env()
 env.read_env()
 ACCOUNT_ID = env('ACCOUNT_ID')
 U_KEY = env('U_KEY')
+TELEGRAM_KEY = env('TELEGRAM_KEY')
+CHAT_ID = env('CHAT_ID')
+BOT = telegram.Bot(token=TELEGRAM_KEY)
 
 
 def get_key(value):
@@ -38,13 +45,21 @@ def create_order(request):
         phone = request.POST['phone']
         address = request.POST['address']
         period = TimeInterval.objects.get(id=request.POST['orderTime'][0])
-        Order.objects.create(
+        order = Order.objects.create(
             bouquet=bouquet,
             name=name,
             phone=phone,
             address=address,
             period=period
         )
+        message = f"""
+            Заказ номер {order.id} создан. 
+            Клиент: {name} {phone}
+            Доставка на {address}
+            Время доставки: {period}
+            Букет {bouquet}
+        """
+        send_notification(BOT, CHAT_ID, message)
         Configuration.account_id = ACCOUNT_ID
         Configuration.secret_key = U_KEY
 
@@ -58,7 +73,8 @@ def create_order(request):
                 "return_url": "http://127.0.0.1:8000/"
             },
             "capture": True,
-            "description": f"{bouquet}"
+            "description": f"{bouquet}",
+            "metadata": {"order": order.id}
         }, uuid.uuid4())
         confirmation_url = payment.confirmation.confirmation_url
     return redirect(confirmation_url)
@@ -66,7 +82,6 @@ def create_order(request):
 
 def index(request):
     bouquets = Bouquet.objects.all()[:3]
-    template = loader.get_template('index.html')
     consult(request)
     context = {
         'bouquets': bouquets
@@ -75,7 +90,6 @@ def index(request):
 
 
 def card(request):
-    template = loader.get_template('card.html')
     consult(request)
     return render(request, 'card.html')
 
@@ -90,7 +104,6 @@ def catalog(request):
             holidays__id=request.GET.get('holiday'),
             price__gte=min_price,
             price__lte=max_price
-
         )
 
     consult(request)
@@ -119,12 +132,10 @@ def catalog_choice(request):
     context = {
         'bouquets': bouquets
     }
-    #return HttpResponse(template.render(context))
     return render(request, 'catalog_choice.html', context)
 
 
 def consultation(request):
-    template = loader.get_template('consultation.html')
     consult(request)
     return render(request, 'consultation.html')
 
