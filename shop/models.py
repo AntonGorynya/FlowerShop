@@ -37,7 +37,7 @@ class Bouquet(models.Model):
         if self.image:
             img_path = self.image.path
             img = Image.open(img_path)
-            img = img.resize((200, 200))
+            img = img.resize((403, 348))
             img.save(img_path)
 
     def __str__(self):
