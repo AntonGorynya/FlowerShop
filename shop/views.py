@@ -31,11 +31,11 @@ def consult(request):
 @csrf_protect
 def create_order(request):
     if request.method == 'POST':
-        bouquet = Bouquet.objects.get(id=request.POST['bouquet'][0])
+        bouquet = Bouquet.objects.get(id=request.POST['bouquet'])
         name = request.POST['name']
         phone = request.POST['phone']
         address = request.POST['address']
-        period = TimeInterval.objects.get(id=request.POST['orderTime'][0])
+        period = TimeInterval.objects.get(id=request.POST['orderTime'])
         order = Order.objects.create(
             bouquet=bouquet,
             name=name,
