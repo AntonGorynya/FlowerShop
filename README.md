@@ -2,7 +2,7 @@
 
 Магазин цветов
 
-## Установка
+## Установка test
 
 ```commandline
 python -m pip install -r requirements.txt
