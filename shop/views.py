@@ -1,5 +1,5 @@
+import urllib
 import telegram
-
 from .telegram_norification import send_notification
 from django.shortcuts import render, loader, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -17,6 +17,7 @@ U_KEY = env('U_KEY')
 TELEGRAM_KEY = env('TELEGRAM_KEY')
 CHAT_ID = env('CHAT_ID')
 BOT = telegram.Bot(token=TELEGRAM_KEY)
+URL = 'https://kaser137.pythonanywhere.com/?'
 
 
 @csrf_protect
@@ -61,7 +62,7 @@ def create_order(request):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": f"http://kaser137.pythonanywhere.com/?id={bouquet.id}"
+                "return_url": URL + urllib.parse.urlencode({'order': order.id})
             },
             "capture": True,
             "description": f"{bouquet}",
@@ -72,6 +73,11 @@ def create_order(request):
 
 
 def index(request):
+    if request.GET.get('order'):
+        order = Order.objects.get(id=request.GET.get('order'))
+        order.is_paid = True
+        order.save()
+        send_notification(BOT, CHAT_ID, f'Закакз {order.id} Оплачен')
     bouquets = Bouquet.objects.all()[:3]
     consult(request)
     context = {
